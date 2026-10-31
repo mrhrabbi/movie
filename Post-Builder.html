@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CineVault — Movie Post Builder</title>
+<style>
+:root{color-scheme:dark;--bg:#090c12;--panel:#11161f;--line:#293240;--muted:#a1aec0;--accent:#ff713e}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f5f6fa;font:14px/1.7 system-ui,sans-serif}.wrap{max-width:1000px;margin:auto;padding:35px 22px 70px}header{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:25px}.brand{font-size:26px;font-weight:850;letter-spacing:-1px}.brand span{color:var(--accent)}h1{font-size:27px;line-height:1.3;margin:15px 0 8px}h2{font-size:17px;margin:0 0 17px}p{color:var(--muted);margin:5px 0 15px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:23px;margin:20px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{display:block;font-size:12px;font-weight:650;color:#d9e0ea}input,textarea,select{display:block;width:100%;margin-top:6px;border:1px solid #354154;background:#090e16;color:#fff;border-radius:7px;padding:11px 12px;font:13px/1.5 system-ui}textarea{min-height:95px;resize:vertical}input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:2px}.full{grid-column:1/-1}.hint{font-size:11px;color:var(--muted);margin-top:5px}button{border:1px solid transparent;border-radius:7px;padding:11px 17px;font:700 12px system-ui;cursor:pointer;background:var(--accent);color:#17110d}button.secondary{background:#1b2431;color:#e5ecf6;border-color:#354154}button:hover{filter:brightness(1.1)}button:focus-visible{outline:2px solid white;outline-offset:3px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:17px 0}.download{border:1px solid var(--line);border-radius:9px;padding:16px;margin:13px 0}.download-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.download-head strong{font-size:12px}.download-head button{padding:6px 10px;font-size:11px}#output{font:12px/1.65 ui-monospace,monospace;min-height:330px;white-space:pre;tab-size:2}.status{font-size:12px;color:#7bdcb5;min-height:22px}.error{color:#ff9b83}.notice{border-left:3px solid var(--accent);padding:10px 15px;background:#ff713e09;font-size:12px;color:#c5cfdd}.check{display:flex;align-items:center;gap:9px}.check input{width:auto;margin:0}code{color:#ffb193}@media(max-width:650px){.wrap{padding:22px 15px}.grid{grid-template-columns:1fr}.full{grid-column:auto}.panel{padding:17px}h1{font-size:23px}input,textarea{font-size:16px}#output{font-size:11px}}
+</style>
+</head>
+<body><div class="wrap">
+<header><div class="brand">CINE<span>VAULT</span> <small style="font-size:11px;letter-spacing:2px;color:#a1aec0">POST BUILDER</small></div><h1>আপনার পরের movie post তৈরি করুন</h1><form id="builder"><p>ফর্ম পূরণ করে code তৈরি করুন। তারপর Blogger-এর New post → HTML view-তে paste করুন। এই tool কোনো তথ্য server-এ পাঠায় না।</p></header>
+<div class="notice">Post title Blogger-এর title field-এ দিন। Hero-তে দেখাতে পোস্টে <code>Trending</code> label যোগ করুন। শুধু নিজের বা অনুমতিপ্রাপ্ত content-এর link ব্যবহার করুন।</div>
+<section class="panel"><h2>১. Poster ও গল্প</h2><div class="grid">
+<label class="full">Movie title<input name="movieTitle" required placeholder="Beyond the Orbit"></label>
+<label class="full">Poster image URL<input name="poster" type="url" required placeholder="https://your-image-host/poster.jpg"><span class="hint">প্রথম ছবি = homepage thumbnail। অনুমতিপ্রাপ্ত HTTPS image ব্যবহার করুন।</span></label>
+<label class="full">Landscape backdrop URL — optional<input name="backdrop" type="url" placeholder="https://your-image-host/backdrop.jpg"></label>
+<label class="full">Synopsis<textarea name="synopsis" required placeholder="সিনেমার গল্প সংক্ষেপে লিখুন…"></textarea></label>
+</div></section>
+<section class="panel"><h2>২. Movie information</h2><div class="grid">
+<label>Release year<input name="year" type="number" min="1888" max="2100" value="2026"></label>
+<label>IMDb rating — optional<input name="rating" type="number" min="0" max="10" step="0.1" placeholder="8.5"></label>
+<label>IMDb ID — optional<input name="imdbId" placeholder="tt1234567"><span class="hint">না জানলে খালি রাখুন। Rating manually entered।</span></label>
+<label>Runtime<input name="duration" placeholder="2h 10m"></label>
+<label>Genres — comma separated<input name="genres" placeholder="Action, Sci-Fi"></label>
+<label>Language<input name="language" placeholder="English + Bangla"></label>
+<label>Quality — comma separated<input name="quality" value="1080p, 720p"></label>
+<label>Certificate<input name="certificate" placeholder="PG-13"></label>
+<label>Director<input name="director" placeholder="Director name"></label>
+<label>Country<input name="country" placeholder="Country"></label>
+<label class="full">Cast<input name="cast" placeholder="Actor 1, Actor 2, Actor 3"></label>
+<label>Audio<input name="audio" placeholder="English 5.1 · Bangla 2.0"></label>
+<label>Source / format<input name="format" placeholder="WEB-DL · MKV"></label>
+</div></section>
+<section class="panel"><h2>৩. Embedded player</h2><label>Embed / video URL<input name="embed" type="url" placeholder="https://www.youtube.com/watch?v=VIDEO_ID"><span class="hint">YouTube, Vimeo, Google Drive, HTTPS iframe embed, অথবা MP4/WebM/OGG। পুরো iframe HTML দেবেন না। Provider embedding অনুমতি না দিলে video চলবে না।</span></label></section>
+<section class="panel"><h2>৪. Download editions</h2><p>প্রতিটি quality/server আলাদা row-এ দিন। খালি URL বাদ যাবে। Size ও format publisher-কে যাচাই করে লিখতে হবে।</p><div id="downloads"></div><button type="button" class="secondary" id="add">+ Add another edition</button></section>
+<section class="panel"><h2>৫. Advanced options</h2><div class="grid"><label class="full">Archive password — optional<input name="password" autocomplete="off"><span class="hint">এটি password protection নয়; visitor-কে archive password দেখানোর সুবিধা মাত্র।</span></label><label class="full">Download instructions — প্রতি লাইনে একটি<textarea name="instructions" placeholder="Choose your preferred quality.&#10;Open the provider and follow its instructions.&#10;Check the file before opening."></textarea></label></div></section>
+<div class="actions"><button type="submit">Generate post code</button><button type="button" class="secondary" id="copy">Copy code</button><button type="button" class="secondary" id="save">Download HTML</button></div><div id="status" class="status" role="status"></div>
+<section class="panel"><h2>৬. Blogger HTML view-তে paste করুন</h2><p>নিচের সম্পূর্ণ কোড কপি করুন। Post title আলাদা করে Blogger-এ দিন। Labels যোগ করে Publish করুন।</p><textarea id="output" readonly spellcheck="false" aria-label="Generated Blogger post HTML"></textarea></section>
+</form><p style="font-size:11px">CineVault 1.0 · Offline helper · আপনার form data এই browser-এর বাইরে পাঠানো হয় না।</p>
+</div>
+<script>
+(function(){
+'use strict';var form=document.getElementById('builder'),out=document.getElementById('output'),status=document.getElementById('status'),count=0;
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function split(s){return s.split(',').map(function(x){return x.trim();}).filter(Boolean);}
+function message(s,error){status.textContent=s;status.className='status'+(error?' error':'');}
+function add(){count++;var d=document.createElement('div');d.className='download';d.innerHTML='<div class="download-head"><strong>Edition '+count+'</strong><button type="button" class="secondary remove">Remove</button></div><div class="grid"><label>Label<input data-key="label" placeholder="1080p WEB-DL · Server 1"></label><label>Quality<input data-key="quality" placeholder="1080p"></label><label>File size<input data-key="size" placeholder="2.4 GB"></label><label>Format<input data-key="format" placeholder="MKV"></label><label class="full">Provider / file URL<input data-key="url" type="url" placeholder="https://your-provider.example/file"></label><label class="full">Note — optional<input data-key="note" placeholder="Audio, subtitles or server details"></label></div>';document.getElementById('downloads').append(d);d.querySelector('.remove').addEventListener('click',function(){d.remove();});}
+document.getElementById('add').addEventListener('click',add);add();add();
+function validURL(s,required){if(!s&&!required)return true;try{var u=new URL(s);return ['https:','http:'].includes(u.protocol)&&!u.username&&!u.password;}catch(e){return false;}}
+form.addEventListener('submit',function(e){e.preventDefault();var data=new FormData(form),v=function(k){return String(data.get(k)||'').trim();};
+if(!validURL(v('poster'),true)||!validURL(v('backdrop'),false)||!validURL(v('embed'),false)){message('Poster, backdrop ও player-এর জন্য valid HTTP/HTTPS URL দিন।',true);return;}
+if(v('imdbId')&&!/^tt\d{7,10}$/.test(v('imdbId'))){message('IMDb ID tt দিয়ে শুরু হতে হবে, অথবা খালি রাখুন।',true);return;}
+var downloads=[];var bad=false;document.querySelectorAll('.download').forEach(function(row){var d={};row.querySelectorAll('[data-key]').forEach(function(el){d[el.dataset.key]=el.value.trim();});if(d.url){if(!validURL(d.url,false)){bad=true;return;}d.quality=d.quality||'Original';d.label=d.label||'Download file';downloads.push(d);}});
+if(bad){message('Download provider URL সঠিক নয়।',true);return;}
+var movie={year:v('year'),rating:v('rating'),imdbId:v('imdbId'),genres:split(v('genres')),duration:v('duration'),language:v('language'),quality:split(v('quality')),certificate:v('certificate'),director:v('director'),cast:v('cast'),country:v('country'),audio:v('audio'),format:v('format'),backdrop:v('backdrop'),embed:v('embed'),downloads:downloads,password:v('password'),instructions:v('instructions').split('\n').map(function(x){return x.trim();}).filter(Boolean)};
+var code='<!-- CineVault movie post: paste in HTML view, before any jump break. -->\n<!-- Post title: '+v('movieTitle').replace(/--/g,'—')+' -->\n<div class="cv-source-poster"><img src="'+esc(v('poster'))+'" alt="'+esc(v('movieTitle'))+' poster" width="600" height="900" /></div>\n<script type="application/json" class="cv-movie-data">\n'+JSON.stringify(movie,null,2).replace(/</g,'\\u003c')+'\n<\/script>\n<div class="cv-synopsis-source">'+esc(v('synopsis'))+'</div>\n';
+out.value=code;message('Code তৈরি হয়েছে। Copy করে Blogger HTML view-তে paste করুন।');out.scrollIntoView({behavior:'smooth',block:'center'});
+});
+document.getElementById('copy').addEventListener('click',async function(){if(!out.value){message('আগে Generate post code চাপুন।',true);return;}try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(out.value);}else{out.focus();out.select();if(!document.execCommand('copy'))throw new Error('copy');}message('Copied হয়েছে। এবার Blogger HTML view-তে paste করুন।');}catch(e){out.focus();out.select();message('Automatic copy সম্ভব হয়নি। নির্বাচিত code manually copy করুন।',true);}});
+document.getElementById('save').addEventListener('click',function(){if(!out.value){message('আগে Generate post code চাপুন।',true);return;}var a=document.createElement('a');var u=URL.createObjectURL(new Blob([out.value],{type:'text/html;charset=utf-8'}));a.href=u;a.download='cinevault-movie-post.html';a.click();setTimeout(function(){URL.revokeObjectURL(u);},1000);message('Post HTML download তৈরি হয়েছে।');});
+})();
+</script></body></html>
